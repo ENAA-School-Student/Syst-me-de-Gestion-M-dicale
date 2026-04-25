@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.example.healthcare.enums.StatutRendezVous;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,15 +17,15 @@ public class RendezVousEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate dateRendezVous;
+    private LocalDateTime dateRendezVous;
     @Enumerated(EnumType.STRING)
-    private StatutRendezVous status;
+    private StatutRendezVous statut;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    private PatientEntity patientEntities;
+    private PatientEntity patient;
 
     @ManyToOne
     @JoinColumn(name = "medecin_id")
-    private MedecinEntity medecinEntities;
+    private MedecinEntity medecin;
 }

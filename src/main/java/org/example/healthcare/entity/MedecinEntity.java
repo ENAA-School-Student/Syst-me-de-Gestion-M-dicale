@@ -22,10 +22,10 @@ public class MedecinEntity {
     private String email;
     private String telephone;
 
-    @OneToMany(mappedBy = "rendezVous",cascade = CascadeType.ALL)
-    List<RendezVousEntity> rendezVousEntities;
+    @OneToMany(mappedBy = "medecin",cascade = CascadeType.ALL)
+    List<RendezVousEntity> rendezVous;
 
     @OneToMany(mappedBy = "medecin",cascade = CascadeType.ALL)
-    List<DossierMedicalEntity> dossierMedicalEntities ;
+    List<DossierMedicalEntity> dossierMedical;
 
 }

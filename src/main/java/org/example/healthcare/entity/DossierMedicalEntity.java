@@ -16,7 +16,7 @@ public class DossierMedicalEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String diagnostic;
-    private String observation;
+    private String observations;
     private LocalDate dateCreation;
 
     @OneToOne
