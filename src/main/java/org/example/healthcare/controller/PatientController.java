@@ -4,10 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.PatientDto;
 import org.example.healthcare.service.PatientService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/patients")
@@ -18,6 +17,24 @@ public class PatientController {
     @PostMapping
     public PatientDto ajouterPatient(@RequestBody PatientDto dto){
         return patientService.ajouterPatient(dto);
+    }
+
+    @PutMapping("/{id}")
+    public PatientDto modifierPatient(@PathVariable Long id,@RequestBody PatientDto dto){
+        return patientService.modifierPatient(id,dto);
+    }
+    @DeleteMapping("/{id}")
+    public void supprimerPatient(@PathVariable Long id){
+        patientService.SupprimerPatient(id);
+    }
+
+    @GetMapping
+    public List<PatientDto> ListerPatients(){
+        return patientService.ListerPatients();
+    }
+    @GetMapping("/{id}")
+    public PatientDto consulterPatient(@PathVariable Long id){
+        return patientService.ConsulterPatient(id);
     }
 
 }

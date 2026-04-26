@@ -7,12 +7,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface PatientMapper {
 
     PatientDto toDto(PatientEntity entity);
-
     PatientEntity toEntity(PatientDto dto);
+    List<PatientDto> toDtoList(List<PatientEntity> patientEntities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDto(PatientDto dto, @MappingTarget PatientEntity patient);
