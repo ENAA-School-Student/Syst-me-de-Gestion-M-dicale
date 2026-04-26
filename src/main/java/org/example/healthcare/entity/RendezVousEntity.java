@@ -17,7 +17,7 @@ public class RendezVousEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dateRendezVous;
+    private LocalDate dateRendezVous;
     @Enumerated(EnumType.STRING)
     private StatutRendezVous statut;
 
