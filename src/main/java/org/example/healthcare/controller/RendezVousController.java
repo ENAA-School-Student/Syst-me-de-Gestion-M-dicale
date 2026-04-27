@@ -32,11 +32,11 @@ public class RendezVousController {
     public RendezVousDto annullerRendezVous(@PathVariable Long id){
         return rendezVousService.AnnuleRendezVous(id);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/patient/{patientId}")
     public List<RendezVousDto> chercherPatient(@PathVariable Long patientId){
         return rendezVousService.chercherPatient(patientId);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/medecin/{medecinId}")
     public List<RendezVousDto> chercherMedecin(@PathVariable Long medecinId){
         return rendezVousService.chercherMedecin(medecinId);
     }

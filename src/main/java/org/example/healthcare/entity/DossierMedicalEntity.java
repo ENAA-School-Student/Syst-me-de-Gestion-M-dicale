@@ -22,8 +22,6 @@ public class DossierMedicalEntity {
     @OneToOne
     @JoinColumn(name = "patient_id")
     private PatientEntity patient;
-    @ManyToOne
-    @JoinColumn(name = "medecin_id")
-    private MedecinEntity medecin;
+
 
 }
