@@ -5,15 +5,18 @@ import org.example.healthcare.entity.MedecinEntity;
 import org.example.healthcare.entity.RendezVousEntity;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface RendezVousMapper {
 
-    @Mapping(source = "patient.id", target="patientId")
-    @Mapping(source = "medecin",target = "medecinId")
+    @Mapping(source = "patient.id", target = "patientId")
+    @Mapping(source = "medecin.id", target = "medecinId")
     RendezVousDto toDto(RendezVousEntity entity);
 
-    @Mapping(source = "patient.id", target="patientId")
-    @Mapping(source = "medecin",target = "medecinId")
+    List<RendezVousDto> toDtoList(List<RendezVousEntity> rendezVousEntities);
+    @Mapping(source = "patientId", target = "patient.id")
+    @Mapping(source = "medecinId", target = "medecin.id")
     RendezVousEntity toEntity(RendezVousDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
