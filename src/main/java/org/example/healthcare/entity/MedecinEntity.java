@@ -25,7 +25,5 @@ public class MedecinEntity {
     @OneToMany(mappedBy = "medecin",cascade = CascadeType.ALL)
     List<RendezVousEntity> rendezVous;
 
-    @OneToMany(mappedBy = "medecin",cascade = CascadeType.ALL)
-    List<DossierMedicalEntity> dossierMedical;
 
 }

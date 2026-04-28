@@ -30,14 +30,14 @@ public class PatientService {
     }
     public void SupprimerPatient(Long id){
         if (!patientRepository.existsById(id)){
-           throw  new EntityNotFoundException("patient introuvable avec l'id :" + id);
+            throw  new EntityNotFoundException("patient introuvable avec l'id :" + id);
         }
         patientRepository.deleteById(id);
 
     }
 
     public List<PatientDto> ListerPatients(){
-         return patientMapper.toDtoList(patientRepository.findAll());
+        return patientMapper.toDtoList(patientRepository.findAll());
     }
 
     public PatientDto ConsulterPatient(Long id){

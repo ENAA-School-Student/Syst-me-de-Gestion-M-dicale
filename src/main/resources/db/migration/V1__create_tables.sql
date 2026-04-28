@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS dossier_medical (
     observations  VARCHAR(255) NOT NULL,
     date_creation DATE ,
     patient_id  BIGINT,
-    medecin_id BIGINT,
-    FOREIGN KEY (patient_id) REFERENCES patient(id),
-    FOREIGN KEY (medecin_id) REFERENCES medecin(id)
+    FOREIGN KEY (patient_id) REFERENCES patient(id)
+
     );
