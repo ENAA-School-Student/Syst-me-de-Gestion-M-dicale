@@ -4,18 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.healthcare.enums.StatutRendezVous;
 
 import java.time.LocalDate;
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
-public class DossierResponse {
+public class RendezVousPatientResponse {
     private Long id;
-    private String diagnostic;
-    private String observations;
-    private LocalDate dateCreation;
-     private PatientDto patient;
-
+    private LocalDate dateRendezVous;
+    private StatutRendezVous statut;
+    private PatientDto patient;
 
 }

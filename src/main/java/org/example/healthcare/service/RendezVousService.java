@@ -3,6 +3,9 @@ package org.example.healthcare.service;
 import lombok.*;
 
 import org.example.healthcare.dto.RendezVousDto;
+import org.example.healthcare.dto.RendezVousMedecinResponse;
+import org.example.healthcare.dto.RendezVousPatientResponse;
+import org.example.healthcare.dto.RendezVousResponse;
 import org.example.healthcare.entity.MedecinEntity;
 import org.example.healthcare.entity.PatientEntity;
 import org.example.healthcare.entity.RendezVousEntity;
@@ -27,7 +30,7 @@ public class RendezVousService {
     private  final PatientRepository patientRepository;
 
 
-    public RendezVousDto creerRendezVous(RendezVousDto dto ){
+    public RendezVousResponse creerRendezVous(RendezVousDto dto ){
 
         MedecinEntity medecin=medecinRepository.findById(dto.getMedecinId()).orElseThrow(() -> new RuntimeException("Medecin not found"));;
         PatientEntity patient=patientRepository.findById(dto.getPatientId()).orElseThrow(() -> new RuntimeException("Patient not found"));;
@@ -35,32 +38,32 @@ public class RendezVousService {
         rendezVous.setMedecin(medecin);
         rendezVous.setPatient(patient);
 
-        return rendezVousMapper.toDto(rendezVousRepository.save(rendezVous));
+        return rendezVousMapper.toResponse(rendezVousRepository.save(rendezVous));
 
     }
 
-    public RendezVousDto modifierRendezVous(Long id,RendezVousDto dto){
+    public RendezVousResponse modifierRendezVous(Long id,RendezVousDto dto){
         RendezVousEntity entity=rendezVousRepository.findById(id).orElseThrow(()->new RuntimeException("Ronder vous not found"));
         rendezVousMapper.updateEntityFromDto(dto,entity);
-        return rendezVousMapper.toDto(rendezVousRepository.save(entity));
+        return rendezVousMapper.toResponse(rendezVousRepository.save(entity));
     }
 
-    public List<RendezVousDto> listerRendezVous(){
+    public List<RendezVousResponse> listerRendezVous(){
         return rendezVousMapper.toDtoList(rendezVousRepository.findAll());
     }
-    public RendezVousDto AnnuleRendezVous(Long id){
+    public RendezVousResponse AnnuleRendezVous(Long id){
         RendezVousEntity rendezVous=rendezVousRepository.findById(id).orElseThrow(()->new RuntimeException("Rendez vous not found"));
         rendezVous.setStatut(StatutRendezVous.ANNULE);
-        return rendezVousMapper.toDto(rendezVousRepository.save(rendezVous));
+        return rendezVousMapper.toResponse(rendezVousRepository.save(rendezVous));
 
     }
 
-    public List<RendezVousDto> chercherPatient(Long patientId){
-        return rendezVousMapper.toDtoList(rendezVousRepository.findByPatientId(patientId));
+    public List<RendezVousPatientResponse> chercherPatient(Long patientId){
+        return rendezVousMapper.toListRenderVousPatient(rendezVousRepository.findByPatientId(patientId));
     }
 
-    public List<RendezVousDto> chercherMedecin(Long medecinId){
-        return rendezVousMapper.toDtoList(rendezVousRepository.findByMedecinId(medecinId));
+    public List<RendezVousMedecinResponse> chercherMedecin(Long medecinId){
+        return rendezVousMapper.toListRendezVousMedecin(rendezVousRepository.findByMedecinId(medecinId));
     }
 
 

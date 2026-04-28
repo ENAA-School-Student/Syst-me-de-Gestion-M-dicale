@@ -32,5 +32,17 @@ public class DossierMedicalService {
         return dossierMedicalMapper.toResponse(dossierMedical);
     }
 
+    public DossierResponse ajouterDiagnostic(Long id ,String diagnostic){
+       DossierMedicalEntity entity=dossierMedicalRepository.findById(id).orElseThrow(()->new RuntimeException("dossier not found: "+id));
+       entity.setDiagnostic(diagnostic);
+       return dossierMedicalMapper.toResponse(dossierMedicalRepository.save(entity));
+    }
+
+    public DossierResponse ajouterObservations (Long id,String observations){
+        DossierMedicalEntity entity=dossierMedicalRepository.findById(id).orElseThrow(()->new RuntimeException("dossier not found : "+id));
+        entity.setObservations(observations);
+        return dossierMedicalMapper.toResponse(dossierMedicalRepository.save(entity));
+    }
+
 
 }
