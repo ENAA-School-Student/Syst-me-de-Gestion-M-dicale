@@ -21,8 +21,8 @@ public class RendezVousController {
     }
 
     @PutMapping("/{id}")
-    public RendezVousDto modifierRendezVous(@PathVariable Long id){
-        return rendezVousService.modifierRendezVous(id);
+    public RendezVousDto modifierRendezVous(@PathVariable Long id,@RequestBody RendezVousDto dto){
+        return rendezVousService.modifierRendezVous(id,dto);
     }
     @GetMapping
     public List<RendezVousDto> listerRendezVous(){
@@ -32,11 +32,11 @@ public class RendezVousController {
     public RendezVousDto annullerRendezVous(@PathVariable Long id){
         return rendezVousService.AnnuleRendezVous(id);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/patient/{patientId}")
     public List<RendezVousDto> chercherPatient(@PathVariable Long patientId){
         return rendezVousService.chercherPatient(patientId);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/medecin/{medecinId}")
     public List<RendezVousDto> chercherMedecin(@PathVariable Long medecinId){
         return rendezVousService.chercherMedecin(medecinId);
     }

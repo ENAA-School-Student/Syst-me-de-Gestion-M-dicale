@@ -39,8 +39,9 @@ public class RendezVousService {
 
     }
 
-    public RendezVousDto modifierRendezVous(Long id){
+    public RendezVousDto modifierRendezVous(Long id,RendezVousDto dto){
         RendezVousEntity entity=rendezVousRepository.findById(id).orElseThrow(()->new RuntimeException("Ronder vous not found"));
+        rendezVousMapper.updateEntityFromDto(dto,entity);
         return rendezVousMapper.toDto(rendezVousRepository.save(entity));
     }
 

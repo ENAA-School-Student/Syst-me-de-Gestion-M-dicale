@@ -20,7 +20,7 @@ public interface RendezVousMapper {
     RendezVousEntity toEntity(RendezVousDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntityFromDto(RendezVousDto dto, @MappingTarget RendezVousDto rendezVousDto);
+    void updateEntityFromDto(RendezVousDto dto, @MappingTarget RendezVousEntity entity);
 
 
 }
