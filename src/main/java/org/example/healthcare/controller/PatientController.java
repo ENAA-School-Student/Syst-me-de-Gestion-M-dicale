@@ -15,16 +15,16 @@ public class PatientController {
 
    private final PatientService patientService;
     @PostMapping
-    public PatientDto ajouterPatient(@RequestBody PatientDto dto){
+    public PatientDto ajouterPatient(@Valid @RequestBody PatientDto dto){
         return patientService.ajouterPatient(dto);
     }
 
     @PutMapping("/{id}")
-    public PatientDto modifierPatient(@PathVariable Long id,@RequestBody PatientDto dto){
+    public PatientDto modifierPatient( @PathVariable Long id,@Valid @RequestBody PatientDto dto){
         return patientService.modifierPatient(id,dto);
     }
     @DeleteMapping("/{id}")
-    public void supprimerPatient(@PathVariable Long id){
+    public void supprimerPatient( @PathVariable Long id){
         patientService.SupprimerPatient(id);
     }
 
@@ -33,7 +33,7 @@ public class PatientController {
         return patientService.ListerPatients();
     }
     @GetMapping("/{id}")
-    public PatientDto consulterPatient(@PathVariable Long id){
+    public PatientDto consulterPatient( @PathVariable Long id){
         return patientService.ConsulterPatient(id);
     }
 

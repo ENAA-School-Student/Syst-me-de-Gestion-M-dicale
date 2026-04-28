@@ -1,9 +1,10 @@
 package org.example.healthcare.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.aspectj.bridge.Message;
+
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -11,8 +12,13 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class DossierRequest {
+    @NotBlank(message = "L'diagnostic est obligatoire")
     private String diagnostic;
+    @NotBlank(message = "l' observation est obligatoire")
     private String observations;
+
+    @NotNull(message = "la date de creation est obligatoire")
     private LocalDate dateCreation;
+    @NotNull(message = "le patient id est obligatoire")
     private Long patientId;
 }

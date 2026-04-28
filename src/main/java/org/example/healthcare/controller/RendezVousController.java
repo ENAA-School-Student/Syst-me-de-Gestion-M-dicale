@@ -3,6 +3,7 @@ package org.example.healthcare.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.RendezVousDto;
 import org.example.healthcare.dto.RendezVousMedecinResponse;
@@ -25,13 +26,13 @@ public class RendezVousController {
 
     @PostMapping
     @Operation(summary ="creer rendez vous")
-    public ResponseEntity<RendezVousResponse> creerRendezVous(@RequestBody RendezVousDto dto){
+    public ResponseEntity<RendezVousResponse> creerRendezVous(@Valid @RequestBody RendezVousDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(rendezVousService.creerRendezVous(dto));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "modifier Rendez vous")
-    public ResponseEntity<RendezVousResponse> modifierRendezVous(@PathVariable Long id,@RequestBody RendezVousDto dto){
+    public ResponseEntity<RendezVousResponse> modifierRendezVous( @PathVariable Long id,@Valid @RequestBody RendezVousDto dto){
         return ResponseEntity.ok(rendezVousService.modifierRendezVous(id,dto));
     }
     @GetMapping
@@ -41,17 +42,17 @@ public class RendezVousController {
     }
     @PatchMapping("/{id}/annuler")
     @Operation(summary = "Annuler rendez-vous")
-    public ResponseEntity<RendezVousResponse> annullerRendezVous(@PathVariable Long id){
+    public ResponseEntity<RendezVousResponse> annullerRendezVous( @PathVariable Long id){
         return ResponseEntity.ok(rendezVousService.AnnuleRendezVous(id));
     }
     @GetMapping("/patient/{patientId}")
     @Operation(summary = "Rechercher par patient")
-    public ResponseEntity<List<RendezVousPatientResponse>> chercherPatient(@PathVariable Long patientId){
+    public ResponseEntity<List<RendezVousPatientResponse>> chercherPatient( @PathVariable Long patientId){
         return ResponseEntity.ok(rendezVousService.chercherPatient(patientId));
     }
     @GetMapping("/medecin/{medecinId}")
     @Operation(summary = "Rechercher par medecin")
-    public ResponseEntity<List<RendezVousMedecinResponse>> chercherMedecin(@PathVariable Long medecinId){
+    public ResponseEntity<List<RendezVousMedecinResponse>> chercherMedecin( @PathVariable Long medecinId){
         return ResponseEntity.ok(rendezVousService.chercherMedecin(medecinId));
     }
 }

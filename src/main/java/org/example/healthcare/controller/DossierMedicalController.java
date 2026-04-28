@@ -2,6 +2,7 @@ package org.example.healthcare.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.DossierRequest;
 import org.example.healthcare.dto.DossierResponse;
@@ -20,25 +21,25 @@ public class DossierMedicalController {
 
     @PostMapping
     @Operation(summary = "Ajouter un Dossier")
-    public ResponseEntity<DossierResponse> creerDossier(@RequestBody DossierRequest request){
+    public ResponseEntity<DossierResponse> creerDossier(@Valid @RequestBody DossierRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(dossierMedicalService.CreerDossier(request));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Consulter dossier médical")
-    public ResponseEntity<DossierResponse> consulterDossier(@PathVariable Long id){
+    public ResponseEntity<DossierResponse> consulterDossier( @PathVariable Long id){
         return ResponseEntity.ok(dossierMedicalService.consulterDossier(id));
     }
 
     @PutMapping("/{id}/diagnostic")
     @Operation(summary = "Ajouter diagnostic")
-    public ResponseEntity<DossierResponse> ajouterDiagnostic(@PathVariable Long id,@RequestParam String diagnostic){
+    public ResponseEntity<DossierResponse> ajouterDiagnostic( @PathVariable Long id,@Valid @RequestParam String diagnostic){
         return ResponseEntity.ok(dossierMedicalService.ajouterDiagnostic(id,diagnostic));
     }
 
     @PutMapping("/{id}/observations")
     @Operation(summary = "ajouter observations")
-    public ResponseEntity<DossierResponse> ajouterObservation(@PathVariable Long id,@RequestParam String observations){
+    public ResponseEntity<DossierResponse> ajouterObservation( @PathVariable Long id,@Valid @RequestParam String observations){
         return ResponseEntity.ok(dossierMedicalService.ajouterObservations(id,observations));
     }
 }
