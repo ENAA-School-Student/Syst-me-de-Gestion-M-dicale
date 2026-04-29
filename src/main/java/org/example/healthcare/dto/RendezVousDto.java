@@ -17,12 +17,12 @@ import java.time.LocalDate;
 public class RendezVousDto {
     @NotNull(message = "la date de rendez vous est obligatoire")
     private LocalDate dateRendezVous;
-    @NotBlank(message = "le statut est obligatoire")
+    @NotNull(message = "le statut est obligatoire")
     private StatutRendezVous statut;
 
-    @NotBlank(message = "le patentId est obligatoire")
+    @NotNull(message = "le patentId est obligatoire")
     private Long patientId;
-    @NotBlank(message = "le medecinId est obligatoire")
+    @NotNull(message = "le medecinId est obligatoire")
     private Long medecinId;
 
 }

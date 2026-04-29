@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class PatientDto {
-
+   private  Long id;
     @NotBlank(message = "le nom est  obligatoire")
     private String nom;
 

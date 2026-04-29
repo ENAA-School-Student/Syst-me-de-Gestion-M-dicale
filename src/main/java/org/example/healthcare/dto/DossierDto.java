@@ -3,7 +3,6 @@ package org.example.healthcare.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.aspectj.bridge.Message;
 
 import java.time.LocalDate;
 
@@ -11,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Setter
 @Getter
-public class DossierRequest {
+public class DossierDto {
     @NotBlank(message = "L'diagnostic est obligatoire")
     private String diagnostic;
     @NotBlank(message = "l' observation est obligatoire")

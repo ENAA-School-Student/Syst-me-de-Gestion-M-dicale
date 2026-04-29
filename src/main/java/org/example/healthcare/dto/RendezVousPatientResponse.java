@@ -15,6 +15,6 @@ public class RendezVousPatientResponse {
     private Long id;
     private LocalDate dateRendezVous;
     private StatutRendezVous statut;
-    private PatientDto patient;
+    private Long patientId;
 
 }

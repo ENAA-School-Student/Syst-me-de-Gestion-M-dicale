@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.RendezVousDto;
 import org.example.healthcare.dto.RendezVousMedecinResponse;
 import org.example.healthcare.dto.RendezVousPatientResponse;
-import org.example.healthcare.dto.RendezVousResponse;
 import org.example.healthcare.service.RendezVousService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,23 +25,23 @@ public class RendezVousController {
 
     @PostMapping
     @Operation(summary ="creer rendez vous")
-    public ResponseEntity<RendezVousResponse> creerRendezVous(@Valid @RequestBody RendezVousDto dto){
+    public ResponseEntity<RendezVousDto> creerRendezVous(@Valid @RequestBody RendezVousDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(rendezVousService.creerRendezVous(dto));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "modifier Rendez vous")
-    public ResponseEntity<RendezVousResponse> modifierRendezVous( @PathVariable Long id,@Valid @RequestBody RendezVousDto dto){
+    public ResponseEntity<RendezVousDto> modifierRendezVous( @PathVariable Long id,@Valid @RequestBody RendezVousDto dto){
         return ResponseEntity.ok(rendezVousService.modifierRendezVous(id,dto));
     }
     @GetMapping
     @Operation(summary = "Lister rendez-vous")
-    public ResponseEntity<List<RendezVousResponse>> listerRendezVous(){
+    public ResponseEntity<List<RendezVousDto>> listerRendezVous(){
         return ResponseEntity.ok(rendezVousService.listerRendezVous());
     }
     @PatchMapping("/{id}/annuler")
     @Operation(summary = "Annuler rendez-vous")
-    public ResponseEntity<RendezVousResponse> annullerRendezVous( @PathVariable Long id){
+    public ResponseEntity<RendezVousDto> annullerRendezVous( @PathVariable Long id){
         return ResponseEntity.ok(rendezVousService.AnnuleRendezVous(id));
     }
     @GetMapping("/patient/{patientId}")
