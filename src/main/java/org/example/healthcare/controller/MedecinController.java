@@ -1,5 +1,6 @@
 package org.example.healthcare.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,19 +21,23 @@ public class MedecinController {
     private final MedecinService medecinService;
 
     @PostMapping
+    @Operation(summary = "Ajouter medecin")
     public ResponseEntity<MedecinDto> ajoutermedecin(@Valid @RequestBody  MedecinDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(medecinService.ajouterMedecin(dto));
     }
     @PutMapping("/{id}")
+    @Operation(summary = "Modifier medecin")
     public ResponseEntity<MedecinDto> modifiermedecin( @PathVariable Long id,@Valid @RequestBody MedecinDto dto){
         return ResponseEntity.ok(medecinService.modifierMedecin(id,dto));
     }
     @DeleteMapping("/{id}")
+    @Operation(summary = "supprimer medecin")
     public ResponseEntity<Void>supprimerMedecin(@PathVariable Long id){
         medecinService.supprimerMedecin(id);
         return ResponseEntity.noContent().build();
     }
     @GetMapping
+    @Operation(summary = "lister medecin")
     public List<MedecinDto> listerMedecins(){
         return medecinService.listerMedecins();
     }

@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS rendez_vous (
     statut VARCHAR(50),
     patient_id BIGINT,
     medecin_id BIGINT,
-    FOREIGN KEY (patient_id) REFERENCES patient(id),
-    FOREIGN KEY (medecin_id) REFERENCES medecin(id)
+    CONSTRAINT fk_rendez_vous_patient FOREIGN KEY (patient_id) REFERENCES patient(id),
+    CONSTRAINT fk_rendez_vous_medecin  FOREIGN KEY (medecin_id) REFERENCES medecin(id)
     );
 
 CREATE TABLE IF NOT EXISTS dossier_medical (
@@ -32,6 +32,6 @@ CREATE TABLE IF NOT EXISTS dossier_medical (
     observations  VARCHAR(255) NOT NULL,
     date_creation DATE ,
     patient_id  BIGINT,
-    FOREIGN KEY (patient_id) REFERENCES patient(id)
+    CONSTRAINT fk_dossier_medical_patient FOREIGN KEY (patient_id) REFERENCES patient(id)
 
     );
