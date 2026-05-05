@@ -36,7 +36,6 @@ public class RendezVousService {
         RendezVousEntity rendezVous = rendezVousMapper.toEntity(dto);
         rendezVous.setMedecin(medecin);
         rendezVous.setPatient(patient);
-
         return rendezVousMapper.toDto(rendezVousRepository.save(rendezVous));
 
     }
@@ -64,7 +63,4 @@ public class RendezVousService {
     public List<RendezVousMedecinResponse> chercherMedecin(Long medecinId){
         return rendezVousMapper.toListRendezVousMedecin(rendezVousRepository.findByMedecinId(medecinId));
     }
-
-
-
 }

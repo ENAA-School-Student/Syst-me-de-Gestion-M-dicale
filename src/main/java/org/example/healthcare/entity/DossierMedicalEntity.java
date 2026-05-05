@@ -27,5 +27,4 @@ public class DossierMedicalEntity {
     @JoinColumn(name = "patient_id")
     private PatientEntity patient;
 
-
 }

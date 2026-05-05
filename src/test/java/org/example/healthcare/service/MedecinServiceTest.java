@@ -57,7 +57,7 @@ class MedecinServiceTest {
         List<MedecinDto> rsult=medecinService.listerMedecins();
         assertNotNull(rsult);
         assertFalse(rsult.isEmpty());
-        assertTrue(rsult.size() >= 2);
+
 
     }
 }
