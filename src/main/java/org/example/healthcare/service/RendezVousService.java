@@ -2,6 +2,7 @@ package org.example.healthcare.service;
 
 import lombok.*;
 
+import org.example.healthcare.dto.MedecinDto;
 import org.example.healthcare.dto.RendezVousDto;
 import org.example.healthcare.dto.RendezVousMedecinResponse;
 import org.example.healthcare.dto.RendezVousPatientResponse;
@@ -9,12 +10,14 @@ import org.example.healthcare.entity.MedecinEntity;
 import org.example.healthcare.entity.PatientEntity;
 import org.example.healthcare.entity.RendezVousEntity;
 import org.example.healthcare.enums.StatutRendezVous;
+import org.example.healthcare.mapper.MedecinMapper;
 import org.example.healthcare.mapper.RendezVousMapper;
 import org.example.healthcare.repository.MedecinRepository;
 import org.example.healthcare.repository.PatientRepository;
 import org.example.healthcare.repository.RendezVousRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,6 +28,7 @@ public class RendezVousService {
 
     private final RendezVousRepository rendezVousRepository;
     private  final RendezVousMapper rendezVousMapper;
+    private  final MedecinMapper medecinMapper;
     private  final MedecinRepository medecinRepository;
     private  final PatientRepository patientRepository;
 
@@ -64,7 +68,6 @@ public class RendezVousService {
     public List<RendezVousMedecinResponse> chercherMedecin(Long medecinId){
         return rendezVousMapper.toListRendezVousMedecin(rendezVousRepository.findByMedecinId(medecinId));
     }
-
 
 
 }
