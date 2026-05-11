@@ -21,6 +21,7 @@ public class MedecinService {
     private final RendezVousMapper rendezVousMapper;
     private final RendezVousRepository rendezVousRepository;
 
+
     public MedecinDto ajouterMedecin(MedecinDto dto){
         MedecinEntity medecin=medecinMapper.toEntity(dto);
         MedecinEntity save=medecinRepository.save(medecin);

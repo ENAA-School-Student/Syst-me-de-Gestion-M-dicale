@@ -1,4 +1,3 @@
-
 package org.example.healthcare.entity;
 
 import jakarta.persistence.*;
@@ -7,24 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "dossier_medical")
-public class DossierMedicalEntity {
+@Table(name = "user")
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String diagnostic;
-    private String observations;
-    private LocalDate dateCreation;
-
-    @OneToOne
-    @JoinColumn(name = "patient_id")
-    private PatientEntity patient;
+    private String username;
+    private String password;
+    @Column(unique = true)
+    private String email;
 
 }
