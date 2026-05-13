@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.AuthRequest;
 import org.example.healthcare.dto.AuthResponse;
 import org.example.healthcare.dto.RegisterRequest;
-import org.example.healthcare.service.AuthService;
+import org.example.healthcare.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController {
-    private final AuthService authService;
+public class AuthenticationController {
+    private final AuthenticationService authService;
    @PostMapping("/register")
     public ResponseEntity<AuthResponse>register(@Valid @RequestBody RegisterRequest request){
        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
