@@ -48,5 +48,4 @@ public class PatientController {
     public ResponseEntity<PatientDto> consulterPatient( @PathVariable Long id){
         return ResponseEntity.ok(patientService.ConsulterPatient(id));
     }
-
 }

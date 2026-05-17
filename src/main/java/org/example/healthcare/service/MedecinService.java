@@ -2,7 +2,6 @@ package org.example.healthcare.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.example.healthcare.dto.MedecinDto;
 import org.example.healthcare.entity.MedecinEntity;
 import org.example.healthcare.mapper.MedecinMapper;
@@ -19,6 +18,8 @@ public class MedecinService {
 
     private final MedecinRepository medecinRepository;
     private final MedecinMapper  medecinMapper;
+    private final RendezVousMapper rendezVousMapper;
+    private final RendezVousRepository rendezVousRepository;
 
 
     public MedecinDto ajouterMedecin(MedecinDto dto){

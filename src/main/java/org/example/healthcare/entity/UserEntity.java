@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.healthcare.enums.Role;
 
 @Entity
 @Getter
@@ -20,5 +21,8 @@ public class UserEntity {
     private String password;
     @Column(unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
