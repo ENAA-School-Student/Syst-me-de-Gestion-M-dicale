@@ -27,11 +27,11 @@ public class AuthenticationService {
         if (userRepository.existsByEmail(registerRequest.getEmail())){
             throw new RuntimeException("email already exists");
         }
-
         UserEntity user =new UserEntity();
         user.setEmail(registerRequest.getEmail());
         user.setUsername(registerRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setRole(registerRequest.getRole());
         userRepository.save(user);
 
         String token =jwtUtil.generateToken(user.getEmail());

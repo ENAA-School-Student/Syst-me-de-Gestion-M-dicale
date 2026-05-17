@@ -16,7 +16,7 @@ public class AuthRequest {
 
     @Email(message = "le email est obligatoire")
     private String email;
-    @Size(min = 6,message = "Le mot de passe est obligatoire")
+    @Size(min = 4,message = "Le mot de passe est obligatoire")
     private String password;
 
 }
