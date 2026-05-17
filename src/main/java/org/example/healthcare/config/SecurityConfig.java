@@ -23,7 +23,6 @@ public class SecurityConfig {
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-//                        .requestMatchers("/api/**").hasRole("ADMIN")
                         .requestMatchers("/api/patient/**").hasAnyRole("ADMIN","PATIENT")
                         .requestMatchers("/api/medecin/**").hasAnyRole("ADMIN", "MEDECIN")
                         .requestMatchers("/api/rendezVous/**").hasAnyRole("ADMIN","MEDECIN","PATIENT")

@@ -9,6 +9,7 @@ import org.example.healthcare.repository.UserRepository;
 import org.example.healthcare.security.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,23 +34,20 @@ public class AuthenticationService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(registerRequest.getRole());
         userRepository.save(user);
-
         String token =jwtUtil.generateToken(user.getEmail());
         return new AuthResponse(token);
 
     }
+
     public AuthResponse login(AuthRequest request){
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
-
-        UserEntity user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+        UserEntity user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new RuntimeException("User not found"));
         String token = jwtUtil.generateToken(user.getEmail());
-
         return new AuthResponse(token);
     }
+
 
 }
