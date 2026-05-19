@@ -1,4 +1,4 @@
 package org.example.healthcare.config;
 
-public class SecurityConfig {
+public class git SecurityConfig {
 }
