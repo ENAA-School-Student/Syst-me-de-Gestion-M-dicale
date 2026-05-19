@@ -13,10 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-<<<<<<< HEAD
-public class git SecurityConfig {
-}
-=======
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -64,4 +61,4 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 }
->>>>>>> 3cac77214b6ab09aa9ee2498248e990e15a214e1
+
