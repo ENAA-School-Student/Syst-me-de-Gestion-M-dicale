@@ -1,6 +1,7 @@
 package org.example.healthcare.dto;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +16,7 @@ public class AuthRequest {
 
     @Email(message = "le email est obligatoire")
     private String email;
-    @Size(min = 6,message = "Le mot de passe est obligatoire")
+    @Size(min = 4,message = "Le mot de passe est obligatoire")
     private String password;
 
 }

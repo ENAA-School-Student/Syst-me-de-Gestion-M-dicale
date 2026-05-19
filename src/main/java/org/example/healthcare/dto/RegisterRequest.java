@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.healthcare.enums.Role;
 
 @Getter
 @Setter
@@ -17,7 +18,9 @@ public class RegisterRequest {
     private String username;
     @Email(message = "invalide email")
     private String email;
-    @Size(min = 6,message = "Password must be at least 6 characters")
+    @Size(min = 4,message = "Password must be at least 6 characters")
     private String password;
+
+    private Role role;
 
 }
