@@ -11,11 +11,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 private final UserRepository userRepository;
 @Override
     public UserDetails loadUserByUsername(String email){
-    var user=userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException("user note found"));
-    return User.builder()
-            .username(user.getEmail())
-            .password(user.getPassword())
-            .roles(user.getRole().name())
-            .build();
+    return userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException("user note found"));
+
 }
 }
