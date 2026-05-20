@@ -9,6 +9,7 @@ import org.example.healthcare.dto.RendezVousDto;
 import org.example.healthcare.dto.RendezVousMedecinResponse;
 import org.example.healthcare.dto.RendezVousPatientResponse;
 import org.example.healthcare.service.RendezVousService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -43,8 +44,8 @@ public class RendezVousController {
     @PreAuthorize("hasAnyRole('ADMIN','MEDECIN','PATIENT')")
     @GetMapping
     @Operation(summary = "Lister rendez-vous")
-    public ResponseEntity<List<RendezVousDto>> listerRendezVous(){
-        return ResponseEntity.ok(rendezVousService.listerRendezVous());
+    public ResponseEntity<Page<RendezVousDto>> listerRendezVous(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "5")int size){
+        return ResponseEntity.ok(rendezVousService.listerRendezVous(page,size));
     }
     @PatchMapping("/{id}/annuler")
     @PreAuthorize("hasRole('ADMIN')")

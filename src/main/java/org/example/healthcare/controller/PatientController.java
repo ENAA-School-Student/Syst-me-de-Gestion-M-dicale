@@ -12,9 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/patient")
 @RequiredArgsConstructor
@@ -46,8 +43,13 @@ public class PatientController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     @Operation(summary = "Lister Patients ")
-    public ResponseEntity<Page<PatientDto>> ListerPatients(@RequestParam (defaultValue = "0") int page,@RequestParam (defaultValue = "5") int size){
-        return ResponseEntity.ok(patientService.ListerPatients(page,size));
+    public ResponseEntity<Page<PatientDto>> ListerPatients(
+            @RequestParam (defaultValue = "0") int page,
+            @RequestParam (defaultValue = "5") int size,
+            @RequestParam(defaultValue = "nom")String sortBy,
+            @RequestParam(defaultValue = "asc")String sortDeriction)
+    {
+        return ResponseEntity.ok(patientService.ListerPatients(page,size,sortBy,sortDeriction));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','PATIENT')")
