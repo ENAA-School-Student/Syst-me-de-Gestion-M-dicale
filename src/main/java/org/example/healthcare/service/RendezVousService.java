@@ -50,8 +50,9 @@ public class RendezVousService {
         return rendezVousMapper.toDto(rendezVousRepository.save(entity));
     }
 
-    public Page<RendezVousDto> listerRendezVous(int page,int size){
-        Pageable pageable= PageRequest.of(page,size);
+    public Page<RendezVousDto> listerRendezVous(int page,int size,String sortBy,String sortDirection){
+        Sort sort=sortDirection.equalsIgnoreCase("dec")? Sort.by(sortBy).descending():Sort.by(sortBy).descending();
+        Pageable pageable= PageRequest.of(page,size,sort);
         return rendezVousRepository.findAll(pageable).map(rendezVousMapper::toDto);
     }
     public RendezVousDto AnnuleRendezVous(Long id){

@@ -44,8 +44,13 @@ public class RendezVousController {
     @PreAuthorize("hasAnyRole('ADMIN','MEDECIN','PATIENT')")
     @GetMapping
     @Operation(summary = "Lister rendez-vous")
-    public ResponseEntity<Page<RendezVousDto>> listerRendezVous(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "5")int size){
-        return ResponseEntity.ok(rendezVousService.listerRendezVous(page,size));
+    public ResponseEntity<Page<RendezVousDto>> listerRendezVous(
+            @RequestParam(defaultValue = "0")int page,
+            @RequestParam(defaultValue = "5")int size,
+            @RequestParam(defaultValue = "dateRendezVous")String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ){
+        return ResponseEntity.ok(rendezVousService.listerRendezVous(page,size,sortBy,sortDirection));
     }
     @PatchMapping("/{id}/annuler")
     @PreAuthorize("hasRole('ADMIN')")
