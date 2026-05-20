@@ -49,15 +49,9 @@ public class RendezVousService {
         rendezVousMapper.updateEntityFromDto(dto,entity);
         return rendezVousMapper.toDto(rendezVousRepository.save(entity));
     }
-//
-//    public List<RendezVousDto> listerRendezVous(){
-//        return rendezVousMapper.toDtoList(rendezVousRepository.findAll());
-//    }
 
-    public Page<RendezVousDto> listerRendezVous(int page,int size,String sortBy,String sortDeriction){
-
-        Sort sort=sortDeriction.equalsIgnoreCase("asc")?Sort.by(sortBy).ascending():Sort.by(sortBy).descending();
-        Pageable pageable= PageRequest.of(page,size,sort);
+    public Page<RendezVousDto> listerRendezVous(int page,int size){
+        Pageable pageable= PageRequest.of(page,size);
         return rendezVousRepository.findAll(pageable).map(rendezVousMapper::toDto);
     }
     public RendezVousDto AnnuleRendezVous(Long id){
