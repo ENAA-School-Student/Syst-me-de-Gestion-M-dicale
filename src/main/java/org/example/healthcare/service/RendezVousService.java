@@ -13,6 +13,10 @@ import org.example.healthcare.mapper.RendezVousMapper;
 import org.example.healthcare.repository.MedecinRepository;
 import org.example.healthcare.repository.PatientRepository;
 import org.example.healthcare.repository.RendezVousRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,8 +50,9 @@ public class RendezVousService {
         return rendezVousMapper.toDto(rendezVousRepository.save(entity));
     }
 
-    public List<RendezVousDto> listerRendezVous(){
-        return rendezVousMapper.toDtoList(rendezVousRepository.findAll());
+    public Page<RendezVousDto> listerRendezVous(int page,int size){
+        Pageable pageable= PageRequest.of(page,size);
+        return rendezVousRepository.findAll(pageable).map(rendezVousMapper::toDto);
     }
     public RendezVousDto AnnuleRendezVous(Long id){
         RendezVousEntity rendezVous=rendezVousRepository.findById(id).orElseThrow(()->new RuntimeException("Rendez vous not found"));
