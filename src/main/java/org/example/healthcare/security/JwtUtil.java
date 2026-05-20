@@ -37,7 +37,7 @@ public class JwtUtil {
                 .verifyWith(getKey())
                 .build()
                 .parseSignedClaims(token)
-                .getPayload()
+                .getBody()
                 .getSubject();
     }
 
@@ -52,7 +52,7 @@ public class JwtUtil {
                 .verifyWith(getKey())
                 .build()
                 .parseSignedClaims(token)
-                .getPayload()
+                .getBody()
                 .getExpiration()
                 .before(new Date());
     }

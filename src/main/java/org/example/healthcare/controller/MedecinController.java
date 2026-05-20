@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.MedecinDto;
 import org.example.healthcare.service.MedecinService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class MedecinController {
     }
     @GetMapping
     @Operation(summary = "lister medecin")
-    public List<MedecinDto> listerMedecins(){
-        return medecinService.listerMedecins();
+    public ResponseEntity<Page<MedecinDto>> listerMedecins(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "5")int size){
+        return ResponseEntity.ok( medecinService.listerMedecins(page,size));
     }
 }
