@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 public interface MedecinRepository extends JpaRepository <MedecinEntity ,Long> {
  Page<MedecinEntity> findAll(Pageable pageable);
+ Page<MedecinEntity> findBySpecialiteContainingIgnoreCase(String specialite, Pageable pageable);
  }

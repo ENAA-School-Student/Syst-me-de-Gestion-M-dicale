@@ -54,4 +54,9 @@ public class MedecinService {
         Pageable pageable= PageRequest.of(page,size,sort);
         return medecinRepository.findAll(pageable).map(medecinMapper::toDto);
     }
+
+    public Page<MedecinDto> rechercherParSpecialite(String specialite, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return medecinRepository.findBySpecialiteContainingIgnoreCase(specialite, pageable).map(medecinMapper::toDto);
+    }
 }
