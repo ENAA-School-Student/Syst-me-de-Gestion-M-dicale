@@ -8,6 +8,10 @@ import org.example.healthcare.mapper.MedecinMapper;
 import org.example.healthcare.mapper.RendezVousMapper;
 import org.example.healthcare.repository.MedecinRepository;
 import org.example.healthcare.repository.RendezVousRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,7 +44,14 @@ public class MedecinService {
         medecinRepository.deleteById(id);
     }
 
-    public List<MedecinDto> listerMedecins(){
-        return  medecinMapper.toDtoList(medecinRepository.findAll());
+//    public List<MedecinDto> listerMedecins(){
+//        return  medecinMapper.toDtoList(medecinRepository.findAll());
+//    }
+
+
+    public Page<MedecinDto> listerMedecins(int page,int size,String sortDir){
+        Sort sort=sortDir.equalsIgnoreCase("asc")?Sort.by("specialite").ascending():Sort.by("specialite").ascending();
+        Pageable pageable= PageRequest.of(page,size,sort);
+        return medecinRepository.findAll(pageable).map(medecinMapper::toDto);
     }
 }
