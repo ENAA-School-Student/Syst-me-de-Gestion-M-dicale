@@ -56,4 +56,14 @@ public class MedecinController {
     ){
         return ResponseEntity.ok( medecinService.listerMedecins(page,size,sorDir));
     }
+    @GetMapping("/search")
+    public ResponseEntity<Page<MedecinDto>> rechercherMedecin(
+            @RequestParam String specialite,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size
+    ) {
+        return ResponseEntity.ok(
+                medecinService.rechercherParSpecialite(specialite, page, size)
+        );
+    }
 }

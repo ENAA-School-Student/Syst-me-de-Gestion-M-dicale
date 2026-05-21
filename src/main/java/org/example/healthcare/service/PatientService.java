@@ -55,6 +55,10 @@ public class PatientService {
         PatientEntity patient=patientRepository.findById(id).orElse(null);
         return patientMapper.toDto(patient);
     }
+    public Page<PatientDto> rechercherPatientParNom(String nom, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
+        return patientRepository.findByNomContainingIgnoreCase(nom, pageable).map(patientMapper::toDto);
+    }
 
 }

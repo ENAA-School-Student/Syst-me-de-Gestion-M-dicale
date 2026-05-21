@@ -69,4 +69,9 @@ public class RendezVousService {
     public List<RendezVousMedecinResponse> chercherMedecin(Long medecinId){
         return rendezVousMapper.toListRendezVousMedecin(rendezVousRepository.findByMedecinId(medecinId));
     }
+
+    public Page<RendezVousDto> rechercherParStatut(StatutRendezVous statut, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return rendezVousRepository.findByStatut(statut, pageable).map(rendezVousMapper::toDto);
+    }
 }

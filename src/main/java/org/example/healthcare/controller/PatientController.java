@@ -58,4 +58,13 @@ public class PatientController {
     public ResponseEntity<PatientDto> consulterPatient( @PathVariable Long id){
         return ResponseEntity.ok(patientService.ConsulterPatient(id));
     }
+    @PreAuthorize("hasAnyRole('ADMIN','PATIENT')")
+    @GetMapping("/search")
+    public ResponseEntity<Page<PatientDto>> rechercherPatient(
+            @RequestParam String nom,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size
+    ) {
+        return ResponseEntity.ok(patientService.rechercherPatientParNom(nom, page, size));
+    }
 }

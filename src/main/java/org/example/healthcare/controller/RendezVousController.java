@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.RendezVousDto;
 import org.example.healthcare.dto.RendezVousMedecinResponse;
 import org.example.healthcare.dto.RendezVousPatientResponse;
+import org.example.healthcare.enums.StatutRendezVous;
 import org.example.healthcare.service.RendezVousService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -71,6 +70,16 @@ public class RendezVousController {
     @Operation(summary = "Rechercher par medecin")
     public ResponseEntity<List<RendezVousMedecinResponse>> chercherMedecin( @PathVariable Long medecinId){
         return ResponseEntity.ok(rendezVousService.chercherMedecin(medecinId));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<RendezVousDto>> rechercherParStatut(
+            @RequestParam StatutRendezVous statut,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size
+    ) {
+
+        return ResponseEntity.ok(rendezVousService.rechercherParStatut(statut, page, size));
     }
 }
 
