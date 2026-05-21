@@ -1,7 +1,9 @@
 package org.example.healthcare.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.example.healthcare.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +24,6 @@ public class JwtUtil {
     }
 
     public String generateToken(String email) {
-
         return Jwts.builder()
                 .subject(email)
                 .issuedAt(new Date())
@@ -37,7 +38,7 @@ public class JwtUtil {
                 .verifyWith(getKey())
                 .build()
                 .parseSignedClaims(token)
-                .getBody()
+                .getPayload()
                 .getSubject();
     }
 
@@ -52,7 +53,7 @@ public class JwtUtil {
                 .verifyWith(getKey())
                 .build()
                 .parseSignedClaims(token)
-                .getBody()
+                .getPayload()
                 .getExpiration()
                 .before(new Date());
     }
