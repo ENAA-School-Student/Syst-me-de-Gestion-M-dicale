@@ -11,6 +11,7 @@ import org.example.healthcare.repository.RendezVousRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,8 +49,14 @@ public class MedecinService {
 //    }
 
 
-    public Page<MedecinDto> listerMedecins(int page,int size){
-        Pageable pageable= PageRequest.of(page,size);
+    public Page<MedecinDto> listerMedecins(int page,int size,String sortDir){
+        Sort sort=sortDir.equalsIgnoreCase("asc")?Sort.by("specialite").ascending():Sort.by("specialite").ascending();
+        Pageable pageable= PageRequest.of(page,size,sort);
         return medecinRepository.findAll(pageable).map(medecinMapper::toDto);
+    }
+
+    public Page<MedecinDto> rechercherParSpecialite(String specialite, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return medecinRepository.findBySpecialiteContainingIgnoreCase(specialite, pageable).map(medecinMapper::toDto);
     }
 }

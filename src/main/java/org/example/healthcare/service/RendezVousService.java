@@ -50,8 +50,9 @@ public class RendezVousService {
         return rendezVousMapper.toDto(rendezVousRepository.save(entity));
     }
 
-    public Page<RendezVousDto> listerRendezVous(int page,int size){
-        Pageable pageable= PageRequest.of(page,size);
+    public Page<RendezVousDto> listerRendezVous(int page,int size,String sortBy,String sortDirection){
+        Sort sort=sortDirection.equalsIgnoreCase("dec")? Sort.by(sortBy).descending():Sort.by(sortBy).descending();
+        Pageable pageable= PageRequest.of(page,size,sort);
         return rendezVousRepository.findAll(pageable).map(rendezVousMapper::toDto);
     }
     public RendezVousDto AnnuleRendezVous(Long id){
@@ -67,5 +68,10 @@ public class RendezVousService {
 
     public List<RendezVousMedecinResponse> chercherMedecin(Long medecinId){
         return rendezVousMapper.toListRendezVousMedecin(rendezVousRepository.findByMedecinId(medecinId));
+    }
+
+    public Page<RendezVousDto> rechercherParStatut(StatutRendezVous statut, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return rendezVousRepository.findByStatut(statut, pageable).map(rendezVousMapper::toDto);
     }
 }
