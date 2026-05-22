@@ -4,6 +4,7 @@
 
 Le **Système de Gestion Médicale (HealthCare+)** est une application web développée avec **Spring Boot**.
 
+
 Elle permet de gérer efficacement :
 
 -  Les patients  
