@@ -10,5 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
     Page<PatientEntity> findAll(Pageable pageable);
-    Page<PatientEntity> findByNomContainingIgnoreCase(String nom, Pageable pageable);
+//    Page<PatientEntity> findByNomContainingIgnoreCase(String username, Pageable pageable);
+    Page<PatientEntity> findByPrenomContainingIgnoreCase(String prenom, Pageable pageable);
 }

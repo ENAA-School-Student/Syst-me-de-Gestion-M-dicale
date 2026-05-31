@@ -15,13 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "patient")
-public class PatientEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nom;
+@PrimaryKeyJoinColumn(name = "id")
+public class PatientEntity extends UserEntity {
+
+
     private String prenom;
-    private String email;
     private String telephone;
     private LocalDate dateNaissance;
 

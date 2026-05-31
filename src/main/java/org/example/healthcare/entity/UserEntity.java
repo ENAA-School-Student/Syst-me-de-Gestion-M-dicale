@@ -18,16 +18,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-    private String username;
     private String password;
+    private String username;
     @Column(unique = true)
     private String email;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -37,7 +38,7 @@ public class UserEntity implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
