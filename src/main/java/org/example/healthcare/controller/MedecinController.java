@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.MedecinDto;
+import org.example.healthcare.dto.MedecinRequestDto;
 import org.example.healthcare.service.MedecinService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class MedecinController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Operation(summary = "Ajouter medecin")
-    public ResponseEntity<MedecinDto> ajoutermedecin(@Valid @RequestBody  MedecinDto dto){
+    public ResponseEntity<MedecinRequestDto> ajoutermedecin(@Valid @RequestBody  MedecinRequestDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(medecinService.ajouterMedecin(dto));
     }
 

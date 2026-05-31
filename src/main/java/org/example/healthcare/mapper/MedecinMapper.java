@@ -1,6 +1,7 @@
 package org.example.healthcare.mapper;
 
 import org.example.healthcare.dto.MedecinDto;
+import org.example.healthcare.dto.MedecinRequestDto;
 import org.example.healthcare.entity.MedecinEntity;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -15,9 +16,9 @@ public interface MedecinMapper {
     MedecinDto toDto(MedecinEntity medecin);
     MedecinEntity toEntity(MedecinDto dto);
 
-    List<MedecinDto> toDtoList(List<MedecinEntity> medecinEntities);
+    MedecinRequestDto toDtoRequest(MedecinEntity entity);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+   @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDto(MedecinDto dto, @MappingTarget MedecinEntity medecin);
 
 

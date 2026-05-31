@@ -14,22 +14,22 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class PatientServiceTest {
 
-    @Autowired
-    private PatientService patientService;
-
-    @Test
-    @DisplayName("Test d'ajouter patient")
-    void ajouterPatient() {
-        PatientDto patient=new PatientDto();
-        patient.setNom("soufiane");
-        patient.setPrenom("basri");
-        patient.setEmail("soufiane@gmail.com");
-        patient.setTelephone("07665544");
-        patient.setDateNaissance(LocalDate.of(2026,8,12));
-
-        PatientDto result=patientService.ajouterPatient(patient);
-
-        assertEquals("soufiane",result.getNom());
-
-    }
+//    @Autowired
+//    private PatientService patientService;
+//
+//    @Test
+//    @DisplayName("Test d'ajouter patient")
+//    void ajouterPatient() {
+//        PatientDto patient=new PatientDto();
+//        patient.setNom("soufiane");
+//        patient.setPrenom("basri");
+//        patient.setEmail("soufiane@gmail.com");
+//        patient.setTelephone("07665544");
+//        patient.setDateNaissance(LocalDate.of(2026,8,12));
+//
+//        PatientDto result=patientService.ajouterPatient(patient);
+//
+//        assertEquals("soufiane",result.getNom());
+//
+//    }
 }

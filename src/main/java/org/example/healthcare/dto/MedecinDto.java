@@ -13,9 +13,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MedecinDto {
-     private Long id;
+
     @NotBlank(message = "le nom est  obligatoire")
-    private String nom;
+    private String username;
     @NotBlank(message = "la specialiter est obligatoire")
     private String specialite;
 

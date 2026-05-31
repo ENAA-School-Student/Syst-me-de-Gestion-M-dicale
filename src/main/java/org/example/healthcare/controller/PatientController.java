@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.PatientDto;
+import org.example.healthcare.dto.PatientRequestDto;
 import org.example.healthcare.service.PatientService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class PatientController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Ajouter patient")
-    public ResponseEntity<PatientDto> ajouterPatient(@Valid @RequestBody PatientDto dto){
+    public ResponseEntity<PatientRequestDto> ajouterPatient(@Valid @RequestBody PatientRequestDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(patientService.ajouterPatient(dto));
     }
 
@@ -46,7 +47,7 @@ public class PatientController {
     public ResponseEntity<Page<PatientDto>> ListerPatients(
             @RequestParam (defaultValue = "0") int page,
             @RequestParam (defaultValue = "5") int size,
-            @RequestParam(defaultValue = "nom")String sortBy,
+            @RequestParam(defaultValue = "prenom")String sortBy,
             @RequestParam(defaultValue = "asc")String sortDeriction)
     {
         return ResponseEntity.ok(patientService.ListerPatients(page,size,sortBy,sortDeriction));
