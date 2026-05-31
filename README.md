@@ -2,7 +2,6 @@
 
 HealthCare+ est une application web RESTful d'entreprise conçue pour moderniser et automatiser la gestion des flux de travail cliniques. Développée avec **Java 21** et **Spring Boot**, l'application offre une plateforme sécurisée, scalable et conteneurisée pour orchestrer les interactions entre patients, médecins, rendez-vous et dossiers médicaux.
 
----
 
 ## Architecture & Fonctionnalités Core
 
@@ -65,7 +64,6 @@ L'ensemble de l'écosystème HealthCare+ est entièrement orchestré via **Docke
 * **`Dockerfile` :** Basé sur l'image légère `eclipse-temurin:21-jre-alpine` pour optimiser la taille de l'image finale.
 * **`docker-compose.yml` :** Orchestre deux services interconnectés : `healthcare-app` (Spring Boot) et `healthcare-db` (MySQL 8.0).
 * **Control de Santé (Healthcheck) :** L'application Spring Boot attend que le conteneur MySQL soit totalement prêt (`healthy`) avant d'amorcer le démarrage et les migrations Flyway.
-
 
 ##  Guide de Démarrage Rapide
 
