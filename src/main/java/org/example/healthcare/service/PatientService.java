@@ -1,20 +1,16 @@
 package org.example.healthcare.service;
-
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.PatientDto;
 import org.example.healthcare.dto.PatientRequestDto;
-import org.example.healthcare.dto.RendezVousDto;
 import org.example.healthcare.entity.PatientEntity;
 import org.example.healthcare.enums.Role;
 import org.example.healthcare.mapper.PatientMapper;
-import org.example.healthcare.mapper.RendezVousMapper;
 import org.example.healthcare.repository.PatientRepository;
-import org.example.healthcare.repository.RendezVousRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+
+import org.springframework.data.domain.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "patients")
 public class PatientService {
 
     private final PatientRepository patientRepository;
@@ -30,6 +27,7 @@ public class PatientService {
     private final PasswordEncoder passwordEncoder;
 
     public PatientRequestDto ajouterPatient(PatientRequestDto dto){
+
         PatientEntity patient = new PatientEntity();
         patient.setUsername(dto.getUsername());
         patient.setPrenom(dto.getPrenom());
@@ -56,9 +54,9 @@ public class PatientService {
         patientRepository.deleteById(id);
 
     }
-
+    @Cacheable(value = "patients", key = "#page + '-' + #size + '-' + #sortBy + '-' + #sortDercition")
     public Page<PatientDto> ListerPatients(int page,int size,String sortBy,String sortDercition){
-
+        System.out.println("====== Appel à la base de données pour listerMedecins ======");
         Sort sort= sortDercition.equalsIgnoreCase("asc")? Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
         Pageable pageable= PageRequest.of(page,size,sort);
         return patientRepository.findAll(pageable).map(patientMapper::toDto);
@@ -72,6 +70,14 @@ public class PatientService {
         Pageable pageable = PageRequest.of(page, size);
 
         return patientRepository.findByPrenomContainingIgnoreCase(prenom, pageable).map(patientMapper::toDto);
+    }
+
+    @Cacheable(value = "patients")
+    public List<PatientDto> testCache() {
+
+        System.out.println("DB CALL");
+
+        return patientRepository.findAll().stream().map(patientMapper::toDto).toList();
     }
 
 }

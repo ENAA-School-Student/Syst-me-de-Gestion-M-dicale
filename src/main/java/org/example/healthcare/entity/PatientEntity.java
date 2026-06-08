@@ -23,10 +23,10 @@ public class PatientEntity extends UserEntity {
     private String telephone;
     private LocalDate dateNaissance;
 
-    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<RendezVousEntity> rendezVousEntities;
 
-    @OneToOne(mappedBy = "patient",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "patient",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private DossierMedicalEntity dossierMedicalEntities;
 
 }

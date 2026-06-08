@@ -16,22 +16,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Setter
 @Getter
-public class PatientDto {
+public class PatientDto  {
 
-    @NotBlank(message = "le nom est  obligatoire")
+
     private String username;
-
-    @NotBlank(message = "le prenom est  obligatoire")
     private String prenom;
-
-
-    @NotBlank(message = "L'email est obligatoire")
-    @Email(message = "Email invalide")
     private String email;
-
-    @NotBlank(message = "Le téléphone est obligatoire")
     private String telephone;
-    @NotNull(message = "la date de naissance est obligatoire")
     private LocalDate dateNaissance;
     private Role role;
 }

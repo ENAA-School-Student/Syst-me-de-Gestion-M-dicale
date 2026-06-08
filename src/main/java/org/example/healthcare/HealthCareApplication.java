@@ -2,7 +2,9 @@ package org.example.healthcare;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
+@EnableCaching // Active la gestion globale du cache
 @SpringBootApplication
 public class HealthCareApplication {
 
