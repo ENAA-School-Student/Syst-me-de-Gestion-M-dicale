@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/patient")
 @RequiredArgsConstructor
@@ -51,6 +53,12 @@ public class PatientController {
             @RequestParam(defaultValue = "asc")String sortDeriction)
     {
         return ResponseEntity.ok(patientService.ListerPatients(page,size,sortBy,sortDeriction));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/cache-test")
+    public ResponseEntity<List<PatientDto>> testCache() {
+        return ResponseEntity.ok(patientService.testCache());
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','PATIENT')")
