@@ -14,20 +14,14 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: password
 
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-
-      SPRING_FLYWAY_ENABLED: true
 
       JWT_SECRET: mySecretKeymySecretKeymySecretKey123456
       JWT_EXPIRATION: 3600000
 
     depends_on:
-      db:
-        condition: service_healthy
-
+      - db
     networks:
       - healthcare-network
-
   db:
     image: mysql:8.0
 
@@ -48,11 +42,6 @@ services:
     networks:
       - healthcare-network
 
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppassword" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
 networks:
   healthcare-network:

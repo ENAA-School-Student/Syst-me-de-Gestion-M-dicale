@@ -60,11 +60,6 @@ public class MedecinService {
         medecinRepository.deleteById(id);
     }
 
-//    public List<MedecinDto> listerMedecins(){
-//        return  medecinMapper.toDtoList(medecinRepository.findAll());
-//    }
-
-
     public Page<MedecinDto> listerMedecins(int page,int size,String sortDir){
         Sort sort=sortDir.equalsIgnoreCase("asc")?Sort.by("specialite").ascending():Sort.by("specialite").ascending();
         Pageable pageable= PageRequest.of(page,size,sort);

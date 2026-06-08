@@ -42,16 +42,6 @@ public class PatientService {
         PatientEntity savedPatient = patientRepository.save(patient);
         return patientMapper.toDtoRequest(savedPatient);
     }
-//public PatientDto ajouterPatient(PatientDto dto) {
-//
-//    PatientEntity patient = patientMapper.toEntity(dto);
-//    patient.setRole(Role.PATIENT);
-//    patient.setUsername(dto.getEmail());
-//    String defaultPassword = dto.getPrenom() + "@2026";
-//    patient.setPassword(passwordEncoder.encode(defaultPassword));
-//    PatientEntity savedPatient = patientRepository.save(patient);
-//    return patientMapper.toDto(savedPatient);
-//}
 
     public PatientDto modifierPatient(Long id,PatientDto dto){
         PatientEntity patient=patientRepository.findById(id).orElseThrow(()->new RuntimeException("patient not found"));

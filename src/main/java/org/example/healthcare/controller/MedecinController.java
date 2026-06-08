@@ -57,6 +57,7 @@ public class MedecinController {
     ){
         return ResponseEntity.ok( medecinService.listerMedecins(page,size,sorDir));
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/search")
     public ResponseEntity<Page<MedecinDto>> rechercherMedecin(
             @RequestParam String specialite,

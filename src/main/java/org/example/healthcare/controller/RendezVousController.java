@@ -72,6 +72,7 @@ public class RendezVousController {
         return ResponseEntity.ok(rendezVousService.chercherMedecin(medecinId));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/search")
     public ResponseEntity<Page<RendezVousDto>> rechercherParStatut(
             @RequestParam StatutRendezVous statut,
