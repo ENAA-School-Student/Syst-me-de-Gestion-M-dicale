@@ -34,7 +34,6 @@ public class DossierMedicalService {
 
 
 
-
     public DossierDto ajouterDiagnostic(Long id ,String diagnostic){
        DossierMedicalEntity entity=dossierMedicalRepository.findById(id).orElseThrow(()->new RuntimeException("dossier not found: "+id));
        entity.setDiagnostic(diagnostic);
