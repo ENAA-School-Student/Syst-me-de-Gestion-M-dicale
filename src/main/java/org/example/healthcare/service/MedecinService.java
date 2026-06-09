@@ -60,7 +60,7 @@ public class MedecinService {
         }
         medecinRepository.deleteById(id);
     }
-    @Cacheable(value = "medecins", key = "#page + '-' + #size + '-' + #sortBy + '-' + #sortDercition")
+    @Cacheable(value = "medecins", key = "#page + '-' + #size + '-' + #sortBy")
     public Page<MedecinDto> listerMedecins(int page,int size,String sortDir){
         System.out.println("=======================lister les medecin =================================");
         Sort sort=sortDir.equalsIgnoreCase("asc")?Sort.by("specialite").ascending():Sort.by("specialite").ascending();
