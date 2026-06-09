@@ -31,8 +31,6 @@ public class MedecinService {
     private final PasswordEncoder passwordEncoder;
 
 
-
-
         public MedecinRequestDto ajouterMedecin(MedecinRequestDto dto){
 
             MedecinEntity medecin=new MedecinEntity();
