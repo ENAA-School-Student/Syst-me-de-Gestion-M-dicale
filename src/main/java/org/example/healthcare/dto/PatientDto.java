@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.healthcare.enums.Role;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-public class PatientDto  {
-
+public class PatientDto implements Serializable {
 
     private String username;
     private String prenom;

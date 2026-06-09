@@ -8,11 +8,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class MedecinDto {
+public class MedecinDto implements Serializable {
 
     @NotBlank(message = "le nom est  obligatoire")
     private String username;
