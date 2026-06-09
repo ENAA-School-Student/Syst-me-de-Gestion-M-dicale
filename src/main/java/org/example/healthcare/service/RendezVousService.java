@@ -14,6 +14,7 @@ import org.example.healthcare.mapper.RendezVousMapper;
 import org.example.healthcare.repository.MedecinRepository;
 import org.example.healthcare.repository.PatientRepository;
 import org.example.healthcare.repository.RendezVousRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +34,7 @@ public class RendezVousService {
     private  final MedecinRepository medecinRepository;
     private  final PatientRepository patientRepository;
 
-
+    @CacheEvict(value = "patients", allEntries = true)
     public RendezVousDto creerRendezVous(RendezVousDto dto ){
 
         MedecinEntity medecin=medecinRepository.findById(dto.getMedecinId()).orElseThrow(() -> new RuntimeException("Medecin not found"));;
@@ -44,7 +45,7 @@ public class RendezVousService {
         return rendezVousMapper.toDto(rendezVousRepository.save(rendezVous));
 
     }
-
+    @CacheEvict(value = "patients", allEntries = true)
     public RendezVousDto modifierRendezVous(Long id,RendezVousDto dto){
         RendezVousEntity entity=rendezVousRepository.findById(id).orElseThrow(()->new RuntimeException("Ronder vous not found"));
         rendezVousMapper.updateEntityFromDto(dto,entity);

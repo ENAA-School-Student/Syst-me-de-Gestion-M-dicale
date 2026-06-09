@@ -6,7 +6,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.healthcare.dto.PatientDto;
 import org.example.healthcare.dto.PatientRequestDto;
-import org.example.healthcare.dto.RestPage;
 import org.example.healthcare.entity.PatientEntity;
 import org.example.healthcare.enums.Role;
 import org.example.healthcare.mapper.PatientMapper;
@@ -59,27 +58,14 @@ public class PatientService {
         patientRepository.deleteById(id);
 
     }
-//    @Cacheable(value = "patients", key = "#page + '-' + #size + '-' + #sortBy + '-' + #sortDercition")
-//    public Page<PatientDto> ListerPatients(int page,int size,String sortBy,String sortDercition){
-//        System.out.println("====== Appel à la base de données pour listerMedecins ======");
-//        System.out.println("====== ============================================== ======");
-//        System.out.println("====== Appel à la base de données pour listerMedecins ======");
-//        Sort sort= sortDercition.equalsIgnoreCase("asc")? Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
-//        Pageable pageable= PageRequest.of(page,size,sort);
-//        return patientRepository.findAll(pageable).map(patientMapper::toDto);
-//    }
-
-    @Cacheable(value = "patients", key = "#page + '-' + #size")
-    public Page<PatientDto> ListerPatients(int page, int size, String sortBy, String sortDir) {
+    @Cacheable(value = "patients", key = "#page + '-' + #size + '-' + #sortBy + '-' + #sortDercition")
+    public Page<PatientDto> ListerPatients(int page,int size,String sortBy,String sortDercition){
         System.out.println("====== Appel à la base de données pour listerMedecins ======");
         System.out.println("====== ============================================== ======");
         System.out.println("====== Appel à la base de données pour listerMedecins ======");
-        Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-        Pageable pageable = PageRequest.of(page, size, sort);
-
-        Page<PatientDto> results = patientRepository.findAll(pageable).map(patientMapper::toDto);
-
-        return new RestPage<>(results);
+        Sort sort= sortDercition.equalsIgnoreCase("asc")? Sort.by(sortBy).ascending(): Sort.by(sortBy).descending();
+        Pageable pageable= PageRequest.of(page,size,sort);
+        return patientRepository.findAll(pageable).map(patientMapper::toDto);
     }
 
 
