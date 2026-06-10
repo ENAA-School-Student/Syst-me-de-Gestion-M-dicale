@@ -25,4 +25,21 @@ public class pdfController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(pdf);
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN','PATIENT','MEDECIN')")
+    @GetMapping("/rendezvous/{patientId}")
+    public ResponseEntity<byte[]> downloadRendezVous(@PathVariable Long patientId) {
+        byte[] pdf = pdfService.generateRendezVousPdf(patientId);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=rendezvous.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN','PATIENT','MEDECIN')")
+    @GetMapping("/rapport")
+    public ResponseEntity<byte[]> downloadRapport() {
+        byte[] pdf = pdfService.generateRapportPdf();
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=rapport.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
+    }
 }
