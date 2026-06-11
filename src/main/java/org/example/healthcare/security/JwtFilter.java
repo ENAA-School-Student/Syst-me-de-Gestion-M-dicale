@@ -1,4 +1,5 @@
 package org.example.healthcare.security;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,14 +15,19 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
+
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        return path.startsWith("/auth/") || path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs");
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -49,7 +55,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             }
 
-        }catch (io.jsonwebtoken.ExpiredJwtException e) {
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
             request.setAttribute("expired_exception", "JWT token has expired");
         } catch (io.jsonwebtoken.security.SignatureException | io.jsonwebtoken.MalformedJwtException e) {
             request.setAttribute("expired_exception", "Invalid JWT signature or token");
