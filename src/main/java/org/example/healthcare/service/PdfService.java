@@ -40,7 +40,6 @@ public class PdfService {
 
     public byte[] generateRendezVousPdf(Long patientId) {
         List<RendezVousEntity> rdvs = rendezVousRepository.findByPatientId(patientId);
-
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PdfWriter writer = new PdfWriter(out);
         PdfDocument pdf = new PdfDocument(writer);

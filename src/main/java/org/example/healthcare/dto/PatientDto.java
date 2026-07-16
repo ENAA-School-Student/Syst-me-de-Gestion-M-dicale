@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class PatientDto implements Serializable {
-
+    private  Long id;
     private String username;
     private String prenom;
     private String email;
