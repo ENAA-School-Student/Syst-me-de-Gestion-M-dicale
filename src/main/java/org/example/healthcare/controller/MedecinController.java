@@ -68,4 +68,11 @@ public class MedecinController {
                 medecinService.rechercherParSpecialite(specialite, page, size)
         );
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}")
+    @Operation(summary = "Consulter médecin")
+    public ResponseEntity<MedecinDto> consulterMedecin(@PathVariable Long id) {
+        return ResponseEntity.ok(medecinService.consulterMedecin(id));
+    }
 }

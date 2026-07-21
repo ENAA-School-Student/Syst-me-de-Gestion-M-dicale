@@ -33,7 +33,6 @@ public class PatientService {
         PatientEntity patient = new PatientEntity();
         patient.setUsername(dto.getUsername());
         patient.setPrenom(dto.getPrenom());
-        patient.setId(dto.getId());
         patient.setEmail(dto.getEmail());
         patient.setTelephone(dto.getTelephone());
         patient.setDateNaissance(dto.getDateNaissance());

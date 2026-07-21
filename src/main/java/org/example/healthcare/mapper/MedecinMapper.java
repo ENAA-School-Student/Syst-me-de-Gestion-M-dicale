@@ -12,7 +12,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MedecinMapper {
-
+    @org.mapstruct.Mapping(target = "id", source = "id")
     MedecinDto toDto(MedecinEntity medecin);
     MedecinEntity toEntity(MedecinDto dto);
 

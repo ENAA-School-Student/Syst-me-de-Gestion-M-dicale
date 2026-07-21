@@ -17,7 +17,6 @@ import java.util.List;
 @Table(name = "patient")
 @PrimaryKeyJoinColumn(name = "id")
 public class PatientEntity extends UserEntity {
-    private Long id;
     private String prenom;
     private String telephone;
     private LocalDate dateNaissance;

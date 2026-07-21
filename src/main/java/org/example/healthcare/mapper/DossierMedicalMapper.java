@@ -6,7 +6,7 @@ import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface DossierMedicalMapper {
-
+    @Mapping(source = "id",target = "id")
     DossierMedicalEntity toEntity(DossierDto request);
 
     @Mapping(source = "patient.id", target = "patientId")

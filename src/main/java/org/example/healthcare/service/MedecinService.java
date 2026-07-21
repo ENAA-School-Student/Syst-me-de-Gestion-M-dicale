@@ -72,4 +72,10 @@ public class MedecinService {
         Pageable pageable = PageRequest.of(page, size);
         return medecinRepository.findBySpecialiteContainingIgnoreCase(specialite, pageable).map(medecinMapper::toDto);
     }
+    public MedecinDto consulterMedecin(Long id) {
+        MedecinEntity medecin = medecinRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Médecin introuvable"));
+
+        return medecinMapper.toDto(medecin);
+    }
 }
