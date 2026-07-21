@@ -15,38 +15,52 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    public AuthResponse register(RegisterRequest registerRequest){
-        if (userRepository.existsByUsername(registerRequest.getUsername())){
+    public AuthResponse register(RegisterRequest registerRequest) {
+
+        if (userRepository.existsByUsername(registerRequest.getUsername())) {
             throw new RuntimeException("Username already exists");
         }
-        if (userRepository.existsByEmail(registerRequest.getEmail())){
-            throw new RuntimeException("email already exists");
+
+        if (userRepository.existsByEmail(registerRequest.getEmail())) {
+            throw new RuntimeException("Email already exists");
         }
-        UserEntity user =new UserEntity();
-        user.setEmail(registerRequest.getEmail());
+
+        UserEntity user = new UserEntity();
         user.setUsername(registerRequest.getUsername());
+        user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(registerRequest.getRole());
-        userRepository.save(user);
-        String token =jwtUtil.generateToken(user.getEmail());
-        return new AuthResponse(token);
 
+        userRepository.save(user);
+
+        String token = jwtUtil.generateToken(user.getEmail());
+
+        return new AuthResponse(
+                token,
+                user.getUsername(),
+                user.getRole().name()
+        );
     }
 
-    public AuthResponse login(AuthRequest request){
+    // ================= LOGIN =================
+
+    public AuthResponse login(AuthRequest request) {
 
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(), request.getPassword()
+                )
         );
-        UserEntity user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserEntity user = userRepository.findByEmail(request.getEmail()) .orElseThrow(() -> new RuntimeException("User not found"));
         String token = jwtUtil.generateToken(user.getEmail());
-        return new AuthResponse(token);
+
+        return new AuthResponse(token,user.getUsername(),user.getRole().name());
     }
-
-
 }

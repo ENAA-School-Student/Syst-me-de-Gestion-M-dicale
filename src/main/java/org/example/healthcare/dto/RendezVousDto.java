@@ -17,6 +17,7 @@ import java.util.Spliterator;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RendezVousDto implements Serializable {
+    private Long id;
     @NotNull(message = "la date de rendez vous est obligatoire")
     private LocalDate dateRendezVous;
     @NotNull(message = "le statut est obligatoire")

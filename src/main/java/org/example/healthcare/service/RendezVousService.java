@@ -79,4 +79,20 @@ public class RendezVousService {
         Pageable pageable = PageRequest.of(page, size);
         return rendezVousRepository.findByStatut(statut, pageable).map(rendezVousMapper::toDto);
     }
+
+    public RendezVousDto consulterRendezVous(Long id) {
+
+        RendezVousEntity rendezVous = rendezVousRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Rendez-vous introuvable"));
+
+        return rendezVousMapper.toDto(rendezVous);
+    }
+    @CacheEvict(value = "RendezVous", allEntries = true)
+    public void supprimerRendezVous(Long id) {
+
+        RendezVousEntity rendezVous = rendezVousRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Rendez-vous introuvable"));
+
+        rendezVousRepository.delete(rendezVous);
+    }
 }

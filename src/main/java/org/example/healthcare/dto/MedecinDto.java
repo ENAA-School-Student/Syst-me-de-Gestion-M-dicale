@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class MedecinDto implements Serializable {
-
+    private Long id;
     @NotBlank(message = "le nom est  obligatoire")
     private String username;
     @NotBlank(message = "la specialiter est obligatoire")

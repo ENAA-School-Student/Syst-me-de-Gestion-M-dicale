@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class DossierDto implements Serializable {
+    private Long id;
     @NotBlank(message = "L'diagnostic est obligatoire")
     private String diagnostic;
     @NotBlank(message = "l' observation est obligatoire")
@@ -21,4 +22,5 @@ public class DossierDto implements Serializable {
     private LocalDate dateCreation;
     @NotNull(message = "le patient id est obligatoire")
     private Long patientId;
+    private PatientDto patient;
 }

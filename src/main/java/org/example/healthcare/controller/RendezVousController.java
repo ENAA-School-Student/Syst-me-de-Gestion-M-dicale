@@ -82,6 +82,24 @@ public class RendezVousController {
 
         return ResponseEntity.ok(rendezVousService.rechercherParStatut(statut, page, size));
     }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}")
+    @Operation(summary = "Consulter un rendez-vous")
+    public ResponseEntity<RendezVousDto> consulterRendezVous(@PathVariable Long id){
+
+        return ResponseEntity.ok(
+                rendezVousService.consulterRendezVous(id)
+        );
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Supprimer un rendez-vous")
+    public ResponseEntity<Void> supprimerRendezVous(@PathVariable Long id) {
+        rendezVousService.supprimerRendezVous(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
 
 
